@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agent-harness"
+version = "1.0.0"
+description = "AI Agent Harness learning project implemented in Python"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "ISC" }
+dependencies = [
+  "beautifulsoup4>=4.12,<5",
+  "croniter>=3,<7",
+  "fastapi>=0.115,<1",
+  "httpx>=0.28,<1",
+  "markdownify>=0.13,<2",
+  "openai>=1.90,<3",
+  "pydantic>=2.10,<3",
+  "pydantic-settings>=2.7,<3",
+  "python-dotenv>=1.0,<2",
+  "uvicorn>=0.34,<1",
+]
+
+[project.optional-dependencies]
+feishu = ["lark-oapi>=1.4,<2"]
+mcp = ["mcp>=1.10,<2"]
+sqlite-vec = ["sqlite-vec>=0.1.6,<1"]
+
+[dependency-groups]
+dev = [
+  "pyright>=1.1.400",
+  "pyyaml>=6,<7",
+  "pytest>=8.3,<10",
+  "pytest-asyncio>=0.25,<2",
+  "ruff>=0.11,<1",
+]
+
+[project.scripts]
+agent-harness = "harness.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["harness"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.pyright]
+pythonVersion = "3.11"
+typeCheckingMode = "basic"
+include = ["harness", "tests"]
+venvPath = "."
+venv = ".venv"
