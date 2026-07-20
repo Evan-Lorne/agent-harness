@@ -282,7 +282,7 @@ config/   context/   commands/
 
 ---
 
-## 学习阶段
+## 食用阶段
 
 仓库按知识点保留了五个递进 tag：
 
